@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ateliers et Suivi de Projet</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      color: #333;
+      background-color: #f4f4f4;
+    }
+    header, section {
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 800px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    header {
+      text-align: center;
+      background-color: #007bff;
+      color: #fff;
+    }
+    h1 {
+      margin-top: 0;
+    }
+    .btn {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      background-color: #007bff;
+      color: #fff;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    .btn:hover {
+      background-color: #0056b3;
+    }
+    .task-list {
+      list-style-type: none;
+      padding: 0;
+    }
+    .task-list li {
+      display: flex;
+      justify-content: space-between;
+      padding: 5px;
+      border-bottom: 1px solid #ddd;
+    }
+    .task-list li.completed {
+      text-decoration: line-through;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Ateliers et Suivi de Projet</h1>
+  <p>Outil de suivi pour les ateliers, la synthèse et les étapes du projet.</p>
+</header>
+
+<section id="atelier">
+  <h2>Ateliers</h2>
+  <p>Ajoutez les points discutés durant les ateliers :</p>
+  <input type="text" id="atelierInput" placeholder="Entrez un point...">
+  <button class="btn" onclick="addAtelier()">Ajouter</button>
+  <ul id="atelierList" class="task-list"></ul>
+</section>
+
+<section id="synthese">
+  <h2>Synthèse</h2>
+  <p>Liste des conclusions et actions principales :</p>
+  <input type="text" id="syntheseInput" placeholder="Entrez une conclusion...">
+  <button class="btn" onclick="addSynthese()">Ajouter</button>
+  <ul id="syntheseList" class="task-list"></ul>
+</section>
+
+<section id="suivi">
+  <h2>Tableau de Suivi des Étapes</h2>
+  <p>Liste des actions avec responsables et échéances :</p>
+  <input type="text" id="actionInput" placeholder="Entrez une action...">
+  <input type="text" id="responsableInput" placeholder="Responsable">
+  <input type="date" id="dateInput">
+  <button class="btn" onclick="addAction()">Ajouter</button>
+  <ul id="actionList" class="task-list"></ul>
+</section>
+
+<script>
+  function addAtelier() {
+    const input = document.getElementById('atelierInput');
+    const item = input.value.trim();
+    if (item) {
+      const li = document.createElement('li');
+      li.textContent = item;
+      document.getElementById('atelierList').appendChild(li);
+      input.value = '';
+    }
+  }
+
+  function addSynthese() {
+    const input = document.getElementById('syntheseInput');
+    const item = input.value.trim();
+    if (item) {
+      const li = document.createElement('li');
+      li.textContent = item;
+      document.getElementById('syntheseList').appendChild(li);
+      input.value = '';
+    }
+  }
+
+  function addAction() {
+    const action = document.getElementById('actionInput').value.trim();
+    const responsable = document.getElementById('responsableInput').value.trim();
+    const date = document.getElementById('dateInput').value;
+    if (action && responsable && date) {
+      const li = document.createElement('li');
+      li.textContent = `${action} - Responsable: ${responsable} - Échéance: ${date}`;
+      document.getElementById('actionList').appendChild(li);
+      document.getElementById('actionInput').value = '';
+      document.getElementById('responsableInput').value = '';
+      document.getElementById('dateInput').value = '';
+    }
+  }
+</script>
+
+</body>
+</html>
