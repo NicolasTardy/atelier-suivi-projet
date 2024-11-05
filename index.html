@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ateliers et Suivi de Projet</title>
   <style>
+    /* Style général */
     body {
       font-family: Arial, sans-serif;
       margin: 0;
@@ -12,47 +13,80 @@
       color: #333;
       background-color: #f4f4f4;
     }
-    header, section {
-      padding: 20px;
-      margin: 20px auto;
-      max-width: 800px;
-      background-color: #fff;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
+    
+    /* En-tête */
     header {
       text-align: center;
       background-color: #007bff;
       color: #fff;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
-    h1 {
-      margin-top: 0;
+    
+    header h1 {
+      margin: 0;
+      font-size: 1.8em;
     }
+    
+    header p {
+      font-size: 1em;
+      margin-top: 8px;
+    }
+    
+    /* Sections */
+    section {
+      background-color: #fff;
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    section h2 {
+      font-size: 1.6em;
+      color: #007bff;
+      margin-bottom: 10px;
+    }
+    
+    section p {
+      font-size: 0.9em;
+      color: #555;
+    }
+    
+    /* Boutons */
     .btn {
       padding: 10px 15px;
+      font-size: 0.9em;
+      color: #fff;
+      background-color: #007bff;
       border: none;
       border-radius: 5px;
-      background-color: #007bff;
-      color: #fff;
       cursor: pointer;
       margin-top: 10px;
+      transition: background-color 0.3s ease;
     }
+    
     .btn:hover {
       background-color: #0056b3;
     }
+    
+    /* Liste des tâches */
     .task-list {
       list-style-type: none;
       padding: 0;
+      margin: 10px 0;
     }
+    
     .task-list li {
       display: flex;
       justify-content: space-between;
-      padding: 5px;
+      padding: 8px;
+      background-color: #f9f9f9;
       border-bottom: 1px solid #ddd;
-    }
-    .task-list li.completed {
-      text-decoration: line-through;
-      color: #888;
+      border-radius: 4px;
+      margin-bottom: 8px;
     }
   </style>
 </head>
@@ -63,12 +97,20 @@
   <p>Outil de suivi pour les ateliers, la synthèse et les étapes du projet.</p>
 </header>
 
-<section id="atelier">
-  <h2>Ateliers</h2>
-  <p>Ajoutez les points discutés durant les ateliers :</p>
-  <input type="text" id="atelierInput" placeholder="Entrez un point...">
-  <button class="btn" onclick="addAtelier()">Ajouter</button>
-  <ul id="atelierList" class="task-list"></ul>
+<section id="atelier1">
+  <h2>Atelier 1 : Notre métier</h2>
+  <p>Ajoutez les points discutés durant l'atelier "Notre métier" :</p>
+  <input type="text" id="atelier1Input" placeholder="Entrez un point...">
+  <button class="btn" onclick="addPoint('atelier1')">Ajouter</button>
+  <ul id="atelier1List" class="task-list"></ul>
+</section>
+
+<section id="atelier2">
+  <h2>Atelier 2 : Notre organisation</h2>
+  <p>Ajoutez les points discutés durant l'atelier "Notre organisation" :</p>
+  <input type="text" id="atelier2Input" placeholder="Entrez un point...">
+  <button class="btn" onclick="addPoint('atelier2')">Ajouter</button>
+  <ul id="atelier2List" class="task-list"></ul>
 </section>
 
 <section id="synthese">
@@ -90,13 +132,13 @@
 </section>
 
 <script>
-  function addAtelier() {
-    const input = document.getElementById('atelierInput');
+  function addPoint(atelierId) {
+    const input = document.getElementById(atelierId + 'Input');
     const item = input.value.trim();
     if (item) {
       const li = document.createElement('li');
       li.textContent = item;
-      document.getElementById('atelierList').appendChild(li);
+      document.getElementById(atelierId + 'List').appendChild(li);
       input.value = '';
     }
   }
