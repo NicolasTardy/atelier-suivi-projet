@@ -11,81 +11,50 @@
       margin: 0;
       padding: 0;
       color: #333;
-      background-color: #f4f4f4;
+      background-color: #f2f2f7;
     }
-    
-    /* En-tête */
     header {
       text-align: center;
       background-color: #007bff;
       color: #fff;
       padding: 20px;
       margin-bottom: 20px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
-    
-    header h1 {
-      margin: 0;
-      font-size: 1.8em;
-    }
-    
-    header p {
-      font-size: 1em;
-      margin-top: 8px;
-    }
-    
-    /* Sections */
     section {
       background-color: #fff;
       max-width: 800px;
       margin: 20px auto;
       padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     }
-    
-    section h2 {
-      font-size: 1.6em;
-      color: #007bff;
-      margin-bottom: 10px;
-    }
-    
-    section p {
-      font-size: 0.9em;
-      color: #555;
-    }
-    
-    /* Boutons */
     .btn {
-      padding: 10px 15px;
-      font-size: 0.9em;
+      padding: 8px 14px;
+      font-size: 1em;
       color: #fff;
       background-color: #007bff;
       border: none;
       border-radius: 5px;
       cursor: pointer;
-      margin-top: 10px;
-      transition: background-color 0.3s ease;
+      margin: 5px;
     }
-    
-    .btn:hover {
-      background-color: #0056b3;
+    .btn-danger {
+      background-color: #dc3545;
     }
-    
-    /* Liste des tâches */
     .task-list {
       list-style-type: none;
       padding: 0;
       margin: 10px 0;
     }
-    
     .task-list li {
       display: flex;
       justify-content: space-between;
-      padding: 8px;
+      align-items: center;
+      padding: 10px;
       background-color: #f9f9f9;
-      border-bottom: 1px solid #ddd;
-      border-radius: 4px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
       margin-bottom: 8px;
     }
   </style>
@@ -94,77 +63,224 @@
 
 <header>
   <h1>Ateliers et Suivi de Projet</h1>
-  <p>Outil de suivi pour les ateliers, la synthèse et les étapes du projet.</p>
 </header>
 
 <section id="atelier1">
   <h2>Atelier 1 : Notre métier</h2>
-  <p>Ajoutez les points discutés durant l'atelier "Notre métier" :</p>
-  <input type="text" id="atelier1Input" placeholder="Entrez un point...">
-  <button class="btn" onclick="addPoint('atelier1')">Ajouter</button>
-  <ul id="atelier1List" class="task-list"></ul>
+
+  <h3>Les Missions Clés</h3>
+  <input type="text" id="missionInput" placeholder="Entrez une mission clé...">
+  <button class="btn" onclick="addPoint('mission', 'missionsList', 'syntheseMissionsList')">Ajouter</button>
+  <ul id="missionsList" class="task-list"></ul>
+
+  <h3>Les Objectifs Principaux</h3>
+  <input type="text" id="objectifInput" placeholder="Entrez un objectif...">
+  <button class="btn" onclick="addPoint('objectif', 'objectifsList', 'syntheseObjectifsList')">Ajouter</button>
+  <ul id="objectifsList" class="task-list"></ul>
+
+  <h3>La Valeur Ajoutée</h3>
+  <input type="text" id="valeurInput" placeholder="Entrez une valeur ajoutée...">
+  <button class="btn" onclick="addPoint('valeur', 'valeursList', 'syntheseValeursList')">Ajouter</button>
+  <ul id="valeursList" class="task-list"></ul>
 </section>
 
 <section id="atelier2">
   <h2>Atelier 2 : Notre organisation</h2>
-  <p>Ajoutez les points discutés durant l'atelier "Notre organisation" :</p>
-  <input type="text" id="atelier2Input" placeholder="Entrez un point...">
-  <button class="btn" onclick="addPoint('atelier2')">Ajouter</button>
-  <ul id="atelier2List" class="task-list"></ul>
+
+  <h3>Identifier les Obstacles</h3>
+  <input type="text" id="obstacleInput" placeholder="Entrez un obstacle...">
+  <button class="btn" onclick="addPoint('obstacle', 'obstaclesList', 'syntheseObstaclesList')">Ajouter</button>
+  <ul id="obstaclesList" class="task-list"></ul>
+
+  <h3>Proposer des Solutions</h3>
+  <input type="text" id="solutionInput" placeholder="Entrez une solution...">
+  <button class="btn" onclick="addPoint('solution', 'solutionsList', 'syntheseSolutionsList')">Ajouter</button>
+  <ul id="solutionsList" class="task-list"></ul>
+
+  <h3>Prioriser les Actions</h3>
+  <input type="text" id="actionInput" placeholder="Entrez une action prioritaire...">
+  <button class="btn" onclick="addPoint('action', 'actionsList', 'syntheseActionsList', 'nextStepsList')">Ajouter</button>
+  <ul id="actionsList" class="task-list"></ul>
 </section>
 
 <section id="synthese">
-  <h2>Synthèse</h2>
-  <p>Liste des conclusions et actions principales :</p>
-  <input type="text" id="syntheseInput" placeholder="Entrez une conclusion...">
-  <button class="btn" onclick="addSynthese()">Ajouter</button>
-  <ul id="syntheseList" class="task-list"></ul>
+  <h2>Tableau de Synthèse des Commentaires</h2>
+  <h3>Les Missions Clés</h3>
+  <ul id="syntheseMissionsList" class="task-list"></ul>
+  <h3>Les Objectifs Principaux</h3>
+  <ul id="syntheseObjectifsList" class="task-list"></ul>
+  <h3>La Valeur Ajoutée</h3>
+  <ul id="syntheseValeursList" class="task-list"></ul>
+  <h3>Identifier les Obstacles</h3>
+  <ul id="syntheseObstaclesList" class="task-list"></ul>
+  <h3>Proposer des Solutions</h3>
+  <ul id="syntheseSolutionsList" class="task-list"></ul>
+  <h3>Prioriser les Actions</h3>
+  <ul id="syntheseActionsList" class="task-list"></ul>
 </section>
 
-<section id="suivi">
-  <h2>Tableau de Suivi des Étapes</h2>
-  <p>Liste des actions avec responsables et échéances :</p>
-  <input type="text" id="actionInput" placeholder="Entrez une action...">
-  <input type="text" id="responsableInput" placeholder="Responsable">
-  <input type="date" id="dateInput">
-  <button class="btn" onclick="addAction()">Ajouter</button>
-  <ul id="actionList" class="task-list"></ul>
+<section id="nextSteps">
+  <h2>Prochaines Étapes</h2>
+  <ul id="nextStepsList" class="task-list"></ul>
 </section>
 
 <script>
-  function addPoint(atelierId) {
-    const input = document.getElementById(atelierId + 'Input');
+  document.addEventListener('DOMContentLoaded', () => {
+    loadStoredData('missionsList', 'syntheseMissionsList');
+    loadStoredData('objectifsList', 'syntheseObjectifsList');
+    loadStoredData('valeursList', 'syntheseValeursList');
+    loadStoredData('obstaclesList', 'syntheseObstaclesList');
+    loadStoredData('solutionsList', 'syntheseSolutionsList');
+    loadStoredData('actionsList', 'syntheseActionsList', 'nextStepsList');
+  });
+
+  function addPoint(inputId, listId, syntheseListId, nextStepsListId = null) {
+    const input = document.getElementById(inputId + 'Input');
     const item = input.value.trim();
     if (item) {
-      const li = document.createElement('li');
-      li.textContent = item;
-      document.getElementById(atelierId + 'List').appendChild(li);
+      const list = document.getElementById(listId);
+      const li = createListItem(item, listId, syntheseListId, nextStepsListId);
+      list.appendChild(li);
       input.value = '';
+      saveListData(listId, syntheseListId, nextStepsListId); // Sauvegarde après ajout
     }
   }
 
-  function addSynthese() {
-    const input = document.getElementById('syntheseInput');
-    const item = input.value.trim();
-    if (item) {
-      const li = document.createElement('li');
-      li.textContent = item;
-      document.getElementById('syntheseList').appendChild(li);
-      input.value = '';
+  function createListItem(itemText, listId, syntheseListId, nextStepsListId = null) {
+    const li = document.createElement('li');
+    li.textContent = itemText;
+
+    const deleteButton = document.createElement('button');
+    deleteButton.textContent = "Supprimer";
+    deleteButton.classList.add('btn', 'btn-danger');
+    deleteButton.onclick = () => {
+      li.remove();
+      const syntheseLi = document.getElementById(syntheseListId).querySelector(`li[data-text="${itemText}"]`);
+      if (syntheseLi) syntheseLi.remove();
+      if (nextStepsListId) {
+        const nextStepsLi = document.getElementById(nextStepsListId).querySelector(`li[data-text="${itemText}"]`);
+        if (nextStepsLi) nextStepsLi.remove();
+      }
+      saveListData(listId, syntheseListId, nextStepsListId); // Sauvegarde après suppression
+    };
+
+    li.appendChild(deleteButton);
+
+    // Ajouter au Tableau de Synthèse
+    const syntheseLi = document.createElement('li');
+    syntheseLi.textContent = itemText;
+    syntheseLi.dataset.text = itemText;
+
+    const syntheseDeleteButton = document.createElement('button');
+    syntheseDeleteButton.textContent = "Supprimer";
+    syntheseDeleteButton.classList.add('btn', 'btn-danger');
+    syntheseDeleteButton.onclick = () => {
+      syntheseLi.remove();
+      li.remove();
+      if (nextStepsListId) {
+        const nextStepsLi = document.getElementById(nextStepsListId).querySelector(`li[data-text="${itemText}"]`);
+        if (nextStepsLi) nextStepsLi.remove();
+      }
+      saveListData(listId, syntheseListId, nextStepsListId); // Sauvegarde après suppression
+    };
+
+    syntheseLi.appendChild(syntheseDeleteButton);
+    document.getElementById(syntheseListId).appendChild(syntheseLi);
+
+    // Ajouter aux Prochaines Étapes si applicable
+    if (nextStepsListId && listId === 'actionsList') {
+      const nextStepsLi = document.createElement('li');
+      nextStepsLi.dataset.text = itemText;
+      nextStepsLi.innerHTML = `<strong>${itemText}</strong><br><textarea placeholder="Nos engagements..."></textarea>`;
+      
+      const nextStepsDeleteButton = document.createElement('button');
+      nextStepsDeleteButton.textContent = "Supprimer";
+      nextStepsDeleteButton.classList.add('btn', 'btn-danger');
+      nextStepsDeleteButton.onclick = () => {
+        nextStepsLi.remove();
+        li.remove();
+        syntheseLi.remove();
+        saveListData(listId, syntheseListId, nextStepsListId); // Sauvegarde après suppression
+      };
+
+      nextStepsLi.appendChild(nextStepsDeleteButton);
+      document.getElementById(nextStepsListId).appendChild(nextStepsLi);
+    }
+
+    return li;
+  }
+
+  function saveListData(listId, syntheseListId, nextStepsListId = null) {
+    const listItems = Array.from(document.getElementById(listId).children).map(li => li.firstChild.textContent);
+    localStorage.setItem(listId, JSON.stringify(listItems));
+
+    const syntheseItems = Array.from(document.getElementById(syntheseListId).children).map(li => li.dataset.text);
+    localStorage.setItem(syntheseListId, JSON.stringify(syntheseItems));
+
+    if (nextStepsListId && listId === 'actionsList') {
+      const nextStepsItems = Array.from(document.getElementById(nextStepsListId).children).map(li => li.dataset.text);
+      localStorage.setItem(nextStepsListId, JSON.stringify(nextStepsItems));
     }
   }
 
-  function addAction() {
-    const action = document.getElementById('actionInput').value.trim();
-    const responsable = document.getElementById('responsableInput').value.trim();
-    const date = document.getElementById('dateInput').value;
-    if (action && responsable && date) {
-      const li = document.createElement('li');
-      li.textContent = `${action} - Responsable: ${responsable} - Échéance: ${date}`;
-      document.getElementById('actionList').appendChild(li);
-      document.getElementById('actionInput').value = '';
-      document.getElementById('responsableInput').value = '';
-      document.getElementById('dateInput').value = '';
+  function loadStoredData(listId, syntheseListId, nextStepsListId = null) {
+    const storedItems = JSON.parse(localStorage.getItem(listId) || '[]');
+    const list = document.getElementById(listId);
+    list.innerHTML = ''; // Clear the list to avoid duplicates
+
+    storedItems.forEach(itemText => {
+      const li = createListItem(itemText, listId, syntheseListId, nextStepsListId);
+      list.appendChild(li);
+    });
+
+    // Charger les données pour le Tableau de Synthèse
+    const storedSyntheseItems = JSON.parse(localStorage.getItem(syntheseListId) || '[]');
+    const syntheseList = document.getElementById(syntheseListId);
+    syntheseList.innerHTML = ''; // Clear to avoid duplicates
+
+    storedSyntheseItems.forEach(itemText => {
+      const syntheseLi = document.createElement('li');
+      syntheseLi.textContent = itemText;
+      syntheseLi.dataset.text = itemText;
+
+      const syntheseDeleteButton = document.createElement('button');
+      syntheseDeleteButton.textContent = "Supprimer";
+      syntheseDeleteButton.classList.add('btn', 'btn-danger');
+      syntheseDeleteButton.onclick = () => {
+        syntheseLi.remove();
+        const listLi = list.querySelector(`li:contains('${itemText}')`);
+        if (listLi) listLi.remove();
+        saveListData(listId, syntheseListId, nextStepsListId); // Sauvegarde après suppression
+      };
+
+      syntheseLi.appendChild(syntheseDeleteButton);
+      syntheseList.appendChild(syntheseLi);
+    });
+
+    // Charger les données pour les Prochaines Étapes si applicable
+    if (nextStepsListId && listId === 'actionsList') {
+      const nextStepsItems = JSON.parse(localStorage.getItem(nextStepsListId) || '[]');
+      const nextStepsList = document.getElementById(nextStepsListId);
+      nextStepsList.innerHTML = ''; // Clear the list to avoid duplicates
+
+      nextStepsItems.forEach(itemText => {
+        const nextStepsLi = document.createElement('li');
+        nextStepsLi.dataset.text = itemText;
+        nextStepsLi.innerHTML = `<strong>${itemText}</strong><br><textarea placeholder="Nos engagements..."></textarea>`;
+        
+        const nextStepsDeleteButton = document.createElement('button');
+        nextStepsDeleteButton.textContent = "Supprimer";
+        nextStepsDeleteButton.classList.add('btn', 'btn-danger');
+        nextStepsDeleteButton.onclick = () => {
+          nextStepsLi.remove();
+          const actionLi = list.querySelector(`li:contains('${itemText}')`);
+          if (actionLi) actionLi.remove();
+          saveListData(listId, syntheseListId, nextStepsListId);
+        };
+
+        nextStepsLi.appendChild(nextStepsDeleteButton);
+        nextStepsList.appendChild(nextStepsLi);
+      });
     }
   }
 </script>
